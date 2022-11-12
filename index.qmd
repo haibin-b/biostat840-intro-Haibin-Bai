@@ -1,0 +1,31 @@
+---
+image: Haibin Bai.jpg
+about:
+  template: jolla
+  links:
+    - text: LinkedIn
+      url: "https://www.linkedin.com/in/haibin-bai-7bb2a0199/"
+      icon: linkedin
+    - text: Twitter
+      url: "https://twitter.com/Hbai_B"
+      icon: twitter
+    - text: GitHub
+      icon: github
+      url: "https://github.com/haibin-b"
+    - text: Email
+      url: "mailto:heabin0319@gmail.com"
+      icon: envelope-open-fill
+    - text: CV
+      url: "Haibin Bai_CV.pdf"
+      icon: file-earmark-person-fill
+---
+::: {.column-page}
+
+# Haibin Bai
+
+I’m a second-year Master's student in the [Department of Biomedical Informatics and Data Science](http://dhsi.med.jhmi.edu/) 
+at [Johns Hopkins School of Medicine](https://www.hopkinsmedicine.org/som/). I am interested in health service research, 
+health informatics research, machine learning, and data visualization. I have many hobbies in playing sports, 
+such as tennis 🎾, snowboarding 🏂, soccer ⚽️, billiard 🎱.
+
+:::

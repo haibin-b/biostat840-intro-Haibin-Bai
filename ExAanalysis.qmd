@@ -1,0 +1,148 @@
+---
+title: "Development of Social Determinant of Health (SDOH) composite score"
+listing:
+  contents: posts
+  type: default
+bibliography: References.bib
+---
+
+## Background
+
+::: {.callout-note}
+**Definition:** Social determinants of health (SDOH) are the conditions in the environments where people are born, live, learn, work, play, worship, and age that affect a wide range of health, functioning, and quality-of-life outcomes and risks.
+:::
+
+![Source: Health People 2030](SDOH.png)
+
+#### Potential benefits from SDOH
+- In United States, 3.6 million people did not receive medical care because of transportation barriers [@Wallace2005-yq]
+- Hypothetical US income support policies could prevent 12,000 to 32,000 deaths among the lowest-income, working-age adult population [@Avancena2022-lo]
+- In Illinois, a 42 percent drop in participants' health care costs almost immediately through a housing support program (Better Health Through Housing) [@noauthor_undated-be]
+- SDOH are critical factors for promoting population health and well-being
+
+#### Current efforts on SDOH
+- Growing movement to identify and address non-medical, social need of patients in the health care system   
+- Various SDOH data are publicly available, especially area/community-level SDOH (US Census Bureau, Area Health Resource Files (AHRF), County Health Ranking (CHR), etc.)   
+- Interpreting SDOH is difficult due to the complexity of data, multiple data sources, and the large number of SDOH measurements    
+- Developing a composite score for SDOH could be helpful for interpretation
+
+## Research gaps and objectives
+
+- Current exist SDOH composite scores
+   - either combined all domains of SDOH into one score (e.g., Area Deprivation Index[@Singh2003-gn], Social Vulnerability Index, SDOHi from BUSPH) 
+   - or targeted specific population (e.g., SDOHi from CQL)[@Friedman2020-eq]
+- Few composite scores focused on each domain of SDOH 
+- This study aims to develop SDOH composite score for each domain (could be narrower) and assess the SDOH composite score in predicting outcomes (e.g., utilization, readmission)
+
+## Intended audience
+People who interested in SDOH domain, especially in SDOH composite score.
+
+## Method
+
+Loading packages
+```{r}
+#| label: "setup"
+#| warning: false
+library(corrplot)
+library(FactoMineR)
+library(factoextra)
+library(data.table)
+library(tidyverse)
+library(caret)
+library(here)
+library(ggplot2)
+```
+
+**Data source:**\
+Geo Social Analytic Platform (GSAP) data[@Ballena2019-gx] in 2018, which is county-level data includes 3,220 counties
+
+Data dictionary:
+```{r}
+dictionary <- read.csv("~/Desktop/Johns Hopkins University/Courses/2nd Year/2nd Quarter/PH.140.840 Statistical Programming Paradigms and Workflows/Project1/Project1/dictionary.csv")
+knitr::kable(dictionary)
+```
+
+**Statistical analysis:**\
+used principal component analysis to classify variables into meaningful group
+
+## Results
+
+Read dataset:
+```{r}
+housing <- read.csv("~/Downloads/housing.csv")
+```
+
+```{r}
+#| warning: false
+# convert character to numeric
+housing <- housing %>% 
+  mutate_at(vars(-("geoid")), as.numeric)
+sapply(housing, class)
+```
+
+```{r}
+# detect and delete missing value
+sum(is.na(housing))
+dim(housing)
+housing_clean <- na.omit(housing)
+sum(is.na(housing_clean))
+dim(housing_clean)
+```
+
+```{r}
+# feature scale
+housing_clean <- housing_clean %>% subset(select = -geoid)
+preproc <- preProcess(housing_clean, method=c("range"))
+housing_norm <- predict(preproc, housing_clean)
+summary(housing_norm)
+```
+
+```{r}
+#| label: fig-mtcars1
+#| fig-cap: "Housing variables correlation matrix"
+#| warning: false
+corr_matrix <- cor(housing_norm)
+# correlation plot
+corrplot(corr_matrix, method="pie", hc.order = TRUE, type = "upper")
+```
+
+```{r}
+#| label: fig-mtcars2
+#| fig-cap: "Scree plot for Factors vs Eigenvalue"
+#| warning: false
+res.pca <- PCA(housing_norm, ncp = 18, graph = FALSE)
+eig.val <- data.frame(get_eigenvalue(res.pca))
+ggplot(data=eig.val, aes(x= 1:nrow(eig.val), y=eig.val$eigenvalue)) +
+  labs(x = "Diamensions",
+       y = "Eigenvalue") +
+  geom_line() + 
+  geom_point() +
+  geom_hline(yintercept = 1, col = "red")
+```  
+  
+```{r}
+#| label: fig-mtcars3
+#| fig-cap: "Scree plot for factors vs. percentage of explained variances"
+#| column: margin
+print(fviz_eig(res.pca, addlabels = TRUE, ncp = 18))
+```
+  
+```{r}
+#| label: fig-mtcars4
+#| fig-cap: "Variable quality in each factor"
+var <- get_pca_var(res.pca)
+corrplot(var$cos2, is.corr=FALSE)
+```
+
+::: {.callout-important}
+Principal component analysis shows four dimensions/factors are appropriate to explain data variance. These four variables could explain 65.65% of variance of data. However, based on the variable quality graph, we may classify variables into three meaningful components, which could be financial, owener's status, and house condition.   
+- **Financial:** Housingvalue, Mortgage, Mortgagecost, Mortgageval, Rentgross, Mortgagetax   
+- **Owner's status:** Occupyown, Rentprcinc, Units, Unitsownpop, Vehicle, Occupy    
+- **House Condition:** Fuelheat, Kitchen, Plumbing, Room    
+- **Non-classified:** Phone, Yr_median
+:::
+
+## Fuctions from each package
+**dplyr:** select(), mutate_at()    
+**ggplot2:** labs(), geom_line(), geom_point(), geom_hline()    
+**data.table:** na.omit()

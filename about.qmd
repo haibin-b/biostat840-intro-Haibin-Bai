@@ -1,0 +1,41 @@
+::: {.column-page}
+
+<center><h1>Haibin Bai</h1></center>
+
+
+I’m a second-year Master's student in the [Department of Biomedical Informatics and Data Science](http://dhsi.med.jhmi.edu/) at [Johns Hopkins School of Medicine](https://www.hopkinsmedicine.org/som/). I am interested in health service research, health informatics research, machine learning, and data visualization. My research interest is focusing on health service research. Specifically, development of Social Determinant of Health (SDOH) composite score, score-based prediction modeling, and geo-based visualization.
+
+Past projects have focused on health service research. Used South Korea health insurance claim data to distribute healthcare resources and used mortality/readmission predictive model to assess association between healthcare resources between mortality/readmission. Additionally, used multi-level regression model to assess geo-based association.
+
+### Education
+
+**Johns Hopkins University School of Medicine, Baltimore, Maryland**  
+MS in Biomedical Informatics and Data Science | August 2021 - Present (Expected 2023)  
+
+**Seoul National University School of Medicine, Seoul, South Korea**  
+PhD in Health Policy and Management | September 2018 - Present (On hold, Expected 2026)   
+MS in Health Policy and Management | September 2016 - August 2018
+
+**Capital Medical University School of Public Health, Beijing, China**  
+BS in Health Management | September 2012 - July 2016    
+
+### Publications
+
+Belouali A, **Bai H**, Raja K, Liu S, Ding X, Kharrazi H. **Impact of social determinants of health on improving the LACE index for 30-day unplanned readmission prediction**. JAMIA Open. 2022;5(2):ooac046. Published 2022 Jun 10. [doi:10.1093/jamiaopen/ooac046](https://doi.org/10.1093/jamiaopen/ooac046)
+
+Liu S, Ding X, Belouali A, **Bai H**, Raja K, Kharrazi H. **Assessing the Racial and Socioeconomic Disparities in Postpartum Depression Using Population-Level Hospital Discharge Data: Longitudinal Retrospective Study**. JMIR Pediatr Parent. 2022;5(4):e38879. Published 2022 Oct 17. [doi:10.2196/38879](https://pediatrics.jmir.org/2022/4/e38879)
+
+### Projects
+
+Kim Y, Lee T, Kwak M, Shin H, Lee S, Kim J, Park J, Kim J, Kim T, **Bai H**. **Classification of catchment area for essential medical care and analysis of current medical circumstances**. 2019. Ministry of Health and Welfare of South Korea
+
+Kim Y, et al. **Developing a model for an improved medical care supply system**. 2018. NHIS-2019-1-214 National Health Insurance Service of South Korea.
+
+Kim Y, Kim T, Park S, **Bai H**, Lee Y, Jung Y, Cho S. **Development of established criteria for hospital-level health care institutions**. 2018. National Health Insurance Service of South Korea.
+
+Kim Y, Shin H, Kim M, **Bai H**. **Systematized plan for national children hospital inpatient expenses**. 2017. Office of the national assembly Yoon.
+
+Kim Y, Kim M, Kim T, Son C, Kim J, **Bai H**, Yu J. **Calculation of classified new Diagnosis Related Group (DRG) payment adjusted coefficient**. 2016. G000JA1-2016-169 Health Insurance Review and Assessment Service of South Korea.
+
+
+:::
